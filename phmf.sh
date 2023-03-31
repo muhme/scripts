@@ -101,13 +101,13 @@ elif [ "$STATE" == "1" ] ; then
 else
   echo "${ME}: Unknown state \"$STATE\" from com.apple.desktopservices DSDontWriteUSBStores, no idea what to do"
 fi
-DS_STORE=".DS_Store"
+DS_STORE="$1/.DS_Store"
 if [ -f "$DS_STORE" ] ; then
   rm "$DS_STORE" && echo "${ME}: File \"$DS_STORE\" deleted"
 else
   echo "${ME}: OK: File \"$DS_STORE\" doesn't exist"
 fi
-DS_STORE2="._.DS_Store"
+DS_STORE2="$1/._.DS_Store"
 if [ -f "$DS_STORE2" ] ; then
   rm "$DS_STORE2" && echo "${ME}: File \"$DS_STORE2\" deleted"
 else

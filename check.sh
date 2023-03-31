@@ -5,6 +5,7 @@
 #   Creating files ".check.size" and ".check.md5" with counting of bytes and
 #   MD5 hashes of all files at first run.
 #   In following runs all files are compared by size and MD5 hash.
+#   Explicit working only on visible (non-dot-prefixed) files.
 #
 # sample outputs:
 #
@@ -30,7 +31,7 @@
 # - CentOS Stream 9
 #
 # https://github.com/muhme/scripts
-# hlu, Mar 30th 2023
+# hlu, Mar 30th 2023 - Mar 31st 2023
 # MIT license
 
 ME=$(basename "$0")
@@ -54,12 +55,12 @@ fi
 
 if [ -f "${SIZE}" -a -f "${MD5}" ] ; then
   echo "${ME}: Checking all files with files \"${SIZE}\" and \"${MD5}\""
-  find . -type f -not -name '.*' -exec wc -c {} \; > "${TMP_SIZE}"
+  find * -type f -not -name '.*' -exec wc -c {} \; > "${TMP_SIZE}"
   if ! diff "${SIZE}" "${TMP_SIZE}" ; then
     echo "${ME}: Oops: File sizes differ! You may have a problem?" 1>&2
     exit 1
   fi
-  find . -type f -not -name '.*' -exec ${MD5_CMD} {} \; > "${TMP_MD5}"
+  find * -type f -not -name '.*' -exec ${MD5_CMD} {} \; > "${TMP_MD5}"
   if ! diff "${MD5}" "${TMP_MD5}" ; then
     echo "${ME}: Oops: MD5 hashes differ! You may have a problem?" 1>&2
     exit 1
@@ -68,7 +69,7 @@ if [ -f "${SIZE}" -a -f "${MD5}" ] ; then
   exit 0
 else
   echo "${ME}: Running 1st time, creating files \"${SIZE}\" and \"${MD5}\""
-  find . -type f -not -name '.*' -exec wc -c {} \; > "${SIZE}"
-  find . -type f -not -name '.*' -exec ${MD5_CMD} {} \; > "${MD5}"
+  find * -type f -not -name '.*' -exec wc -c {} \; > "${SIZE}"
+  find * -type f -not -name '.*' -exec ${MD5_CMD} {} \; > "${MD5}"
   echo "${ME}: Found " $(wc -l < "${SIZE}") " files, stored file sizes and MD5 hashes, have a nice day"
 fi
