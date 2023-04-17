@@ -1,6 +1,6 @@
 # yml2json.py - converts YAML file format from stdin to JSON on stdout
 #
-# e.g. python3.10 json2yml.py < uk.yml > uk.json
+# e.g. python3.10 yml2json.py < uk.yml > uk.json
 #
 # https://github.com/muhme/scripts
 # hlu, April 15th 2023
