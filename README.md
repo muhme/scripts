@@ -2,6 +2,7 @@
 Shell and Python scripts for very different tasks, mostly in Unix-based systems.
 
 | Script | Description |
+| --- | --- |
 | `check.sh` | File consistency check, e.g. on a USB stick |
 | `json2yml.py` | converts JSON file format from stdin to YAML on stdout |
 | `phmf.sh` | prevent hidden mac folders, e.g. on a USB stick on Mac OS X |
