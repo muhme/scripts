@@ -8,6 +8,7 @@ Shell and Python scripts for very different tasks, mostly in Unix-based systems.
 | [json2yml.py](json2yml.py) | Converts JSON file format from stdin to YAML on stdout |
 | [phmf.sh](phmf.sh) | Prevent hidden mac folders, e.g. on a USB stick on Mac OS X |
 | [photos_from_gedcom.py](photos_from_gedcom.py) | Download photos from GEDCOM export, e.g. from myheritage.com |
+| [reboot_tv.sh](reboot_tv.sh) | reboot Android TV if it has been up for more than 24 hours |
 | [rlmd.sh](rlmd.sh) | Read last modified date to save and restore later with slmd.sh |
 | [sfnfoi.sh](sfnfoi.sh) | Save file name for Obsidian import (from Evernote export) |
 | [slmd.sh](slmd.sh) | Set last modified date as stored from slmd.sh, e.g. in Obsidian .md |
@@ -16,7 +17,7 @@ Shell and Python scripts for very different tasks, mostly in Unix-based systems.
 
 ## License
 
-MIT License, Copyright (c) 2023 Heiko Lübbe, see [LICENSE](LICENSE)
+MIT License, Copyright (c) 2023 – 2024 Heiko Lübbe, see [LICENSE](LICENSE)
 
 ## Contact
 
