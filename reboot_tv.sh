@@ -8,7 +8,7 @@
 #
 #   . working with SONY Bavaria TV for me, does not need root rights
 #   . needs adb installed, on Mac with: brew install android-platform-tools
-#   . nneds to authorize the connection once on TV
+#   . needs to authorize the connection once on TV
 #   . correspondig crontab entry to restart between 3 and 8 o'clock in the Morning is:
 #     0 3-8 * * * /Users/hlu/scripts/reboot_tv.sh
 #   . syslog entries are shown on Mac with e.g. with:
