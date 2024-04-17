@@ -13,6 +13,9 @@
 #     0 3-8 * * * /Users/hlu/scripts/reboot_tv.sh
 #   . syslog entries are shown on Mac with e.g. with:
 #     log show --predicate 'process == "logger"'
+#     ... logger: TV 192.168.178.66 Failed get uptime: adb: device offline
+#     ... logger: TV 192.168.178.66 no reboot is needed, uptime is 20:48
+#     ... logger: TV 192.168.178.66 is rebooting, uptime was 1 day
 #
 # https://github.com/muhme/scripts
 # hlu, Apr 15 2024
@@ -20,6 +23,9 @@
 
 # give the TV a fixed IP address and adjust it here
 TV_IP="192.168.178.66"
+
+# for adb, adjust if needed
+PATH=$PATH:/usr/local/bin
 
 ME=$(basename "$0")
 
@@ -45,7 +51,7 @@ fi
 UPTIME=$(echo $OUTPUT | sed 's/.*up //' | sed 's/, .*//')
 
 # check if the TV is up > 24 hours
-if echo "${UPTIME}" | grep -q "days"; then
+if echo "${UPTIME}" | grep -q "day"; then
   logger -t "${ME}" "TV ${TV_IP} is rebooting, uptime was ${UPTIME}"
   adb shell reboot
 else
