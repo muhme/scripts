@@ -1,6 +1,6 @@
 #!/bin/bash -e
 #
-# phmf.sh – prevent hidden mac folders e.g. on a USB stick on Mac OS X
+# phmf.sh – Prevent hidden mac folders e.g. on a USB stick on Mac OS X
 #
 # The ".Spotlight-V*" folder on a volume is used by macOS to store metadata and indexing information
 # for the Spotlight search feature, enabling fast and efficient searching across the file system.
@@ -17,17 +17,18 @@
 #
 # All hidden folders and files can be omitted e.g. on a USB stick.
 #
-# run with Volume name e.g.
+# Run with Volume name e.g.
 # $ phmf.sh /Volume/KINGSTON
+# $ phmf.sh "/Volume/Backup 2024"
 #
-# tested on:
-# - Mac OS X Ventura 13.2.1
+# Last tested on:
+# - Mac OS X Sonoma 14.5
 #
 # On Catalina and later, if you get "Operation not permitted" when deleting metadata on removable volumes
 # via scipting, grant Terminal Full Disk Access in System Preferences > Security & Privacy.
 
 # https://github.com/muhme/scripts
-# hlu, Mar 31st 2023
+# hlu, 31 March 2023 - 12 July 2024
 # MIT license
 
 ME=$(basename "$0")
@@ -37,7 +38,8 @@ if [[ $# != 1 ]] ; then
   exit 1
 fi
 
-VOLUME=$(df "$1" | awk 'NR==2 {print $NF}')
+# Check it is a volume (working for volume names with spaces)
+VOLUME=$(df "/Volumes/LUEBBE 2024" | awk 'NR==2 {print substr($0, index($0,$9))}')
 if [ "$1" != "$VOLUME" ] ; then
   echo "${ME}: Perhaps \"$1\" is not a volume? Did you mean \"$VOLUME\"?" 1>&2
   exit 1
@@ -90,7 +92,7 @@ if [ ! -f "$TRASHES" ] ; then
   echo "${ME}: Empty file \"$TRASHES\" created"
 fi
 
-# inspect and disable Desktop Services Store for USB volumes
+# Inspect and disable Desktop Services Store for USB volumes
 STATE=$(defaults read com.apple.desktopservices DSDontWriteUSBStores)
 if [ "$STATE" == "0" ] ; then
   echo "${ME}: com.apple.desktopservices DSDontWriteUSBStores was false"
